@@ -1,37 +1,41 @@
-import React from "react";
-import './App.css';
+import React from 'react';
+import './mergeSortVisualizer.css';
 
-export class mergeSortVisualizer extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            array: [],
-        };
-    }
+export class MergeSortVisualizer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      array: [],
+    };
+  }
 
-componentMount(){
+  componentDidMount() {
     this.resetArray();
-}
+  }
 
-resetArray(){
+  resetArray() {
     const array = [];
-    for (let i = 0; i < 100; i++){
-        array.push(randomIntFromInterval(5, 100));
+    for (let i = 0; i < 100; i++) {
+      array.push(randomIntFromInterval(5, 100));
     }
-    this.setState({array});
+    this.setState({ array });
+  }
+
+  render() {
+    const { array } = this.state;
+
+    return (
+      <div className="array-container">
+        {array.map((value, idx) => (
+          <div className="array-bar" key={idx}>
+            {value}
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
-render(){
-    const{array}=this.state;
-
-    return(
-        <>
-        {array.map((value,idx)=>(
-            <div className="array-bar" key={idx}>
-                {value}
-            </div>
-        ))}
-        </>
-        );
-    }
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
